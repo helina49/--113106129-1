@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飲食與營養評估問卷</title>
+</head>
+<body>
+    <h1>飲食與營養評估問卷</h1>
+    <form id="nutritionForm">
+        <!-- 問題 1: 性別 -->
+        <fieldset>
+            <legend>您的性別：</legend>
+            <label><input type="radio" name="gender" value="male"> 男</label>
+            <label><input type="radio" name="gender" value="female"> 女</label>
+        </fieldset>
+
+        <!-- 問題 2: 飲食習慣 -->
+        <fieldset>
+            <legend>您的飲食習慣：</legend>
+            <label><input type="checkbox" name="diet" value="vegetarian"> 素食</label>
+            <label><input type="checkbox" name="diet" value="vegan"> 全素</label>
+            <label><input type="checkbox" name="diet" value="omnivorous"> 雜食</label>
+            <label><input type="checkbox" name="diet" value="low_carb"> 低碳水化合物飲食</label>
+        </fieldset>
+
+        <!-- 問題 3: 每日飲水量 -->
+        <fieldset>
+            <legend>您的每日飲水量（公升）：</legend>
+            <textarea name="waterIntake" id="waterIntake" rows="3" cols="30" placeholder="請輸入例如 1.5 公升"></textarea>
+        </fieldset>
+
+        <!-- 問題 4: 常選擇的餐點類型 -->
+        <fieldset>
+            <legend>您常選擇的餐點類型：</legend>
+            <select name="mealType" id="mealType">
+                <option value="">-- 請選擇 --</option>
+                <option value="fast_food">速食</option>
+                <option value="homemade">自製餐點</option>
+                <option value="restaurant">餐廳餐點</option>
+                <option value="snacks">零食</option>
+            </select>
+        </fieldset>
+
+        <!-- 提交按鈕 -->
+        <button type="button" id="submitBtn">提交</button>
+    </form>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            const form = document.getElementById('nutritionForm');
+
+            // 獲取性別
+            const gender = form.querySelector('input[name="gender"]:checked')?.value || '未選擇';
+
+            // 獲取飲食習慣
+            const diet = Array.from(form.querySelectorAll('input[name="diet"]:checked'))
+                .map(checkbox => checkbox.value);
+
+            // 獲取每日飲水量
+            const waterIntake = form.querySelector('#waterIntake').value || '未填寫';
+
+            // 獲取常選擇的餐點類型
+            const mealType = form.querySelector('#mealType').value || '未選擇';
+
+            // 輸出結果
+            console.log(`性別：${gender}`);
+            console.log(`飲食習慣：${diet.join(', ')}`);
+            console.log(`每日飲水量：${waterIntake}`);
+            console.log(`常選擇的餐點類型：${mealType}`);
+
+            alert(`問卷結果：\n性別：${gender}\n飲食習慣：${diet.join(', ')}\n每日飲水量：${waterIntake}\n常選擇的餐點類型：${mealType}`);
+        });
+    </script>
+</body>
+</html>
